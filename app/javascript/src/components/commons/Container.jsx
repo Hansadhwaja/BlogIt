@@ -6,9 +6,9 @@ import PropTypes from "prop-types";
 import Sidebar from "./Sidebar";
 
 const Container = ({ children, className = "" }) => (
-  <div className="flex h-screen w-full">
+  <div className="flex h-screen w-full overflow-hidden">
     <Sidebar />
-    <div className={classnames("w-full pl-8", [className])}>{children}</div>
+    <div className={classnames("w-full", [className])}>{children}</div>
   </div>
 );
 
