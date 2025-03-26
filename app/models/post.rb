@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
+  has_many :category_posts
+  has_many :categories, through: :category_posts
+  belongs_to :user
+  belongs_to :organization
+
   validates :title, presence: true, length: { maximum: 125 }
   validates :description, presence: true, length: { maximum: 10000 }
   validates_inclusion_of :is_bloggable, in: [true, false]

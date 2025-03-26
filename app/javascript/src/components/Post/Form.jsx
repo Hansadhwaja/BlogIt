@@ -1,8 +1,16 @@
 import React from "react";
 
 import { Input, Button, Textarea } from "components/commons";
+import Select from "react-select";
 
-const Form = ({ post, setPost, loading, handleSubmit, history }) => (
+const Form = ({
+  post,
+  setPost,
+  loading,
+  handleSubmit,
+  history,
+  categories,
+}) => (
   <form
     className="relative h-full space-y-8 rounded-xl border p-8 shadow-xl lg:p-16"
     onSubmit={handleSubmit}
@@ -13,6 +21,28 @@ const Form = ({ post, setPost, loading, handleSubmit, history }) => (
       value={post.title}
       onChange={e => setPost(prev => ({ ...prev, title: e.target.value }))}
     />
+    <div className="mt-1 w-full">
+      <label className="text-sm">Category*</label>
+      <Select
+        isMulti
+        isSearchable
+        className="text-sm"
+        menuPosition="fixed"
+        placeholder="Search category"
+        options={
+          categories?.map(category => ({
+            label: category.name,
+            value: category.id,
+          })) || []
+        }
+        onChange={selectedOptions =>
+          setPost(prev => ({
+            ...prev,
+            category_ids: selectedOptions.map(option => option.value),
+          }))
+        }
+      />
+    </div>
     <Textarea
       label="Description*"
       placeholder="Enter description"

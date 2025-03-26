@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from "react";
 
+import { NoData } from "@bigbinary/neetoui";
 import Logger from "js-logger";
 import { Link } from "react-router-dom";
 
 import Card from "./Card";
 
 import postsApi from "../../apis/posts";
+import usePostsStore from "../../stores/usePostsStore";
 import { Button, PageLoader, PageTitle } from "../commons";
 
 const List = () => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const { clickedCategories } = usePostsStore();
+
   const fetchPosts = async () => {
     try {
-      const {
-        data: { posts },
-      } = await postsApi.fetch();
-      setPosts(posts);
+      const { data } = await postsApi.fetch({
+        category_ids: clickedCategories,
+      });
+      setPosts(data);
     } catch (error) {
       Logger.log("Error:", error);
     } finally {
@@ -27,7 +31,7 @@ const List = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [clickedCategories]);
 
   if (isLoading) return <PageLoader />;
 
@@ -40,9 +44,13 @@ const List = () => {
         </Link>
       </div>
       <div className="h-[90%] overflow-y-scroll">
-        {posts.map(post => (
-          <Card key={post.id} {...post} />
-        ))}
+        {posts.length > 0 ? (
+          posts.map(post => <Card key={post.id} {...post} />)
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <NoData description="No post available" />
+          </div>
+        )}
       </div>
     </div>
   );

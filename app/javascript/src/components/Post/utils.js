@@ -8,3 +8,13 @@ export const formatPost = post => {
 
   return { ...post, title: newTitle, description: newDescription };
 };
+
+export const formatDate = created_at => {
+  const createdAt = new Date(created_at).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+
+  return createdAt;
+};
