@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     post = Post.new(post_params)
     post.categories = Category.where(id: params[:post][:category_ids]) if params[:post][:category_ids].present?
     post.save!
-    render_notice(t("successfully_created"))
+    render_notice(t("successfully_created", entity: "Post"))
   end
 
   def show
