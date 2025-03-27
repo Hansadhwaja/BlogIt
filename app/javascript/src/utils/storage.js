@@ -20,4 +20,12 @@ const getFromLocalStorage = key => {
   }
 };
 
-export { setToLocalStorage, getFromLocalStorage };
+const resetLocalStorage = () => {
+  localStorage.removeItem("authToken");
+  localStorage.removeItem("authEmail");
+  localStorage.removeItem("authUserId");
+  localStorage.removeItem("authUserName");
+  localStorage.removeItem("authUserOrganizationId");
+};
+
+export { setToLocalStorage, getFromLocalStorage, resetLocalStorage };

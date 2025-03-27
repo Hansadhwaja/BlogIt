@@ -2,7 +2,7 @@
 
 class PostsController < ApplicationController
   def index
-    @posts = Post.includes(:categories, :user, :organization)
+    @posts = Post.includes(:categories, :user, :organization).where(organization_id: params[:organization_id])
 
     if params[:category_ids].present?
       category_ids = params[:category_ids].map(&:to_i)
