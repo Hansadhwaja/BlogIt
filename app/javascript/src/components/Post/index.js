@@ -1,7 +1,7 @@
 import Card from "./Card";
-import Create from "./Create";
+import CreatePost from "./Create";
 import Form from "./Form";
 import List from "./List";
-import Show from "./Show";
+import ShowPost from "./Show";
 
-export { Card, Create, Form, List, Show };
+export { Card, CreatePost, Form, List, ShowPost };

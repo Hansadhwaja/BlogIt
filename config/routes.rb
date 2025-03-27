@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :categories, only: %i[index create]
   resources :users, only: :create
   resources :organizations, only: :index
+  resource :session, only: :create
 
   root "home#index"
   get "*path", to: "home#index", via: :all

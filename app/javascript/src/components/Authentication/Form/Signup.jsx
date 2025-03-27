@@ -40,7 +40,7 @@ const Signup = ({
           onChange={e => setEmail(e.target.value)}
         />
         <div className="mt-1 w-full">
-          <label className="text-sm">Category</label>
+          <label className="text-sm">Organization</label>
           <Select
             isSearchable
             className="text-sm"

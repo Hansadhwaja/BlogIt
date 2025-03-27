@@ -9,7 +9,7 @@ import { formatDate } from "./utils";
 import postsApi from "../../apis/posts";
 import PageTitle from "../commons/PageTitle";
 
-const Show = () => {
+const ShowPost = () => {
   const [post, setPost] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
   const { slug } = useParams();
@@ -45,4 +45,4 @@ const Show = () => {
   );
 };
 
-export default Show;
+export default ShowPost;
