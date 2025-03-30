@@ -22,6 +22,12 @@ class PostsController < ApplicationController
     @post = Post.includes(:categories, :user, :organization).find_by!(slug: params[:slug])
   end
 
+  def update
+    post = Post.find_by(slug: params[:slug])
+    post.update!(post_params)
+    render_notice(t("successfully_updated", entity: "Post"))
+  end
+
   private
 
     def post_params

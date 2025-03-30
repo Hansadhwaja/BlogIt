@@ -29,8 +29,12 @@ const Form = ({
         className="text-sm"
         menuPosition="fixed"
         placeholder="Search category"
-        options={
-          categories?.map(category => ({
+        options={categories.map(category => ({
+          label: category.name,
+          value: category.id,
+        }))}
+        value={
+          post.categories?.map(category => ({
             label: category.name,
             value: category.id,
           })) || []
@@ -38,6 +42,10 @@ const Form = ({
         onChange={selectedOptions =>
           setPost(prev => ({
             ...prev,
+            categories: selectedOptions.map(option => ({
+              name: option.label,
+              id: option.value,
+            })),
             category_ids: selectedOptions.map(option => option.value),
           }))
         }

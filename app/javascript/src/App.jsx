@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 import { getFromLocalStorage } from "utils/storage";
 
 import Home from "./components/Home";
-import { CreatePost, ShowPost } from "./components/Post";
+import { CreatePost, ShowPost, EditPost } from "./components/Post";
 
 const App = () => {
   const authToken = getFromLocalStorage("authToken");
@@ -20,6 +20,7 @@ const App = () => {
       <Switch>
         <Route exact component={ShowPost} path="/posts/:slug/show" />
         <Route exact component={CreatePost} path="/posts/create" />
+        <Route exact component={EditPost} path="/posts/:slug/edit" />
         <Route exact component={Signup} path="/signup" />
         <Route exact component={Login} path="/login" />
         <PrivateRoute
