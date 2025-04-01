@@ -1,20 +1,10 @@
 import React from "react";
 
-import { Input, Button, Textarea } from "components/commons";
+import { Input, Textarea } from "components/commons";
 import Select from "react-select";
 
-const Form = ({
-  post,
-  setPost,
-  loading,
-  handleSubmit,
-  history,
-  categories,
-}) => (
-  <form
-    className="relative h-full space-y-8 rounded-xl border p-8 shadow-xl lg:p-16"
-    onSubmit={handleSubmit}
-  >
+const Form = ({ post, setPost, categories }) => (
+  <form className="relative h-full space-y-8 rounded-xl border p-8 shadow-xl lg:p-16">
     <Input
       label="Title*"
       placeholder="Enter title"
@@ -54,21 +44,12 @@ const Form = ({
     <Textarea
       label="Description*"
       placeholder="Enter description"
+      rows={10}
       value={post.description}
       onChange={e =>
         setPost(prev => ({ ...prev, description: e.target.value }))
       }
     />
-    <div className="absolute bottom-8 right-8 flex gap-4 lg:bottom-16 lg:right-16">
-      <Button
-        buttonText="Cancel"
-        loading={loading}
-        style="secondary"
-        type="submit"
-        onClick={() => history.push("/")}
-      />
-      <Button buttonText="Submit" loading={loading} type="submit" />
-    </div>
   </form>
 );
 

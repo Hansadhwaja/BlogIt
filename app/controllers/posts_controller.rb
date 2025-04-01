@@ -28,9 +28,15 @@ class PostsController < ApplicationController
     render_notice(t("successfully_updated", entity: "Post"))
   end
 
+  def destroy
+    post = Post.find_by(slug: params[:slug])
+    post.destroy!
+    render_notice(t("successfully_deleted", entity: "Post"))
+  end
+
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, :user_id, :organization_id, category_ids: [])
+      params.require(:post).permit(:title, :description, :user_id, :organization_id, :status, category_ids: [])
     end
 end

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, PageTitle } from "components/commons";
 
 import Form from "./Form";
+import Header from "./Header";
 import { formatPost } from "./utils";
 
 import { categoriesApi } from "../../apis/categories";
@@ -19,6 +20,7 @@ const CreatePost = ({ history }) => {
     user_id: userId,
     organization_id: organizationId,
     category_ids: [],
+    status: "draft",
   });
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -50,9 +52,13 @@ const CreatePost = ({ history }) => {
   return (
     <Container className="p-8 lg:px-16">
       <div className="flex h-full flex-col gap-y-8">
-        <PageTitle title="New blog post" />
+        <div className="flex justify-between">
+          <PageTitle title="New blog post" />
+          <Header {...{ loading, setPost, post, handleSubmit }} />
+        </div>
         <Form
-          {...{ handleSubmit, loading, setPost, post, history, categories }}
+          buttonText="Submit"
+          {...{ loading, setPost, post, history, categories }}
         />
       </div>
     </Container>
