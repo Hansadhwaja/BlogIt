@@ -45,6 +45,9 @@ const CreatePost = ({ history }) => {
     setCategories(categories);
   };
 
+  const isPostEmpty =
+    !post.title.trim() || !post.description.trim() || !post.category_ids.length;
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -54,7 +57,7 @@ const CreatePost = ({ history }) => {
       <div className="flex h-full flex-col gap-y-8">
         <div className="flex justify-between">
           <PageTitle title="New blog post" />
-          <Header {...{ loading, setPost, post, handleSubmit }} />
+          <Header {...{ loading, setPost, post, handleSubmit, isPostEmpty }} />
         </div>
         <Form
           buttonText="Submit"

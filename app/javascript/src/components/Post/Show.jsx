@@ -46,7 +46,7 @@ const ShowPost = () => {
       <div className="flex justify-between gap-2">
         <div className="flex gap-2">
           <PageTitle title={post?.title} />
-          {post?.drafted_at && (
+          {post?.status === "draft" && (
             <div className="my-auto flex h-5 items-center justify-center  rounded-full border border-red-400 px-6 text-xs font-semibold capitalize text-red-400 shadow-xl">
               {post?.status}
             </div>

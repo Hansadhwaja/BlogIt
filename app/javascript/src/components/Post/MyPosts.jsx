@@ -104,7 +104,7 @@ const MyPosts = () => {
             style="tertiary"
             onClick={() =>
               handleAction(
-                post.status === "draft" ? "publish" : "draft",
+                post.status === "draft" ? "Publish" : "Draft",
                 post?.slug
               )
             }

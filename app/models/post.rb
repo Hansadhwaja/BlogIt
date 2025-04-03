@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  enum :status, { draft: "draft", publish: "publish" }, default: :draft
+  enum :status, { draft: "Draft", publish: "Publish" }, default: :draft
   has_many :category_posts, dependent: :destroy
   has_many :categories, through: :category_posts
   belongs_to :user
@@ -15,8 +15,6 @@ class Post < ApplicationRecord
 
   before_create :set_slug
   before_save :set_published_at, if: -> { status_changed? && publish? }
-  before_save :set_drafted_at, if: -> { draft? }
-  before_create :set_drafted_at, if: -> { draft? }
 
   private
 
@@ -46,10 +44,5 @@ class Post < ApplicationRecord
 
     def set_published_at
       self.published_at = Time.current
-      self.drafted_at = nil
-    end
-
-    def set_drafted_at
-      self.drafted_at = Time.current
     end
 end
