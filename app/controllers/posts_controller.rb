@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    Post.create(post_params)
+    Post.create!(post_params)
     render_notice(t("successfully_created", entity: "Post"))
   end
 
