@@ -11,14 +11,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(post_params)
-    post.categories = Category.where(id: params[:post][:category_ids]) if params[:post][:category_ids].present?
-
-    post.save!
+    Post.create(post_params)
     render_notice(t("successfully_created", entity: "Post"))
   end
 
-  def show;end
+  def show
+    render
+  end
 
   def update
     @post.update!(post_params)
@@ -38,7 +37,6 @@ class PostsController < ApplicationController
 
     def load_post!
       @post = Post.find_by(slug: params[:slug])
-      p @post
     end
 
     def load_posts!
