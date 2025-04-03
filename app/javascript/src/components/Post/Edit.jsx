@@ -4,6 +4,7 @@ import { Container, PageTitle } from "components/commons";
 import { useParams } from "react-router-dom";
 
 import Form from "./Form";
+import Header from "./Header";
 import { formatPost } from "./utils";
 
 import { categoriesApi } from "../../apis/categories";
@@ -13,6 +14,7 @@ const EditPost = ({ history }) => {
   const { slug } = useParams();
 
   const [post, setPost] = useState({});
+  const [initialPost, setInitialPost] = useState({});
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -25,7 +27,9 @@ const EditPost = ({ history }) => {
       user_id: post?.user?.id,
       organization_id: post?.organization?.id,
       category_ids: post.categories?.map(category => category.id),
+      status: post?.status,
     };
+
     try {
       await postsApi.update(formatPost(updatedPost), slug);
       setLoading(false);
@@ -40,6 +44,7 @@ const EditPost = ({ history }) => {
     try {
       const { data } = await postsApi.show(slug);
       setPost(data);
+      setInitialPost(data);
     } catch (error) {
       logger.error(error);
       history.push("/");
@@ -53,6 +58,29 @@ const EditPost = ({ history }) => {
     setCategories(categories);
   };
 
+  const isCategoriesChanged = () => {
+    if (!initialPost?.categories || !post?.categories) return false;
+
+    const sortedInitialCategoriesId = initialPost.categories
+      .map(category => category.id)
+      .sort();
+
+    const sortedPostCategoriesId = post.categories
+      .map(category => category.id)
+      .sort();
+
+    return (
+      JSON.stringify(sortedInitialCategoriesId) !==
+      JSON.stringify(sortedPostCategoriesId)
+    );
+  };
+
+  const isButtonDisabled =
+    post?.title !== initialPost?.title ||
+    post?.description !== initialPost?.description ||
+    isCategoriesChanged() ||
+    post?.status !== initialPost?.status;
+
   useEffect(() => {
     fetchPostDetails();
     fetchCategories();
@@ -61,11 +89,21 @@ const EditPost = ({ history }) => {
   return (
     <Container className="p-8 lg:px-16">
       <div className="flex h-full flex-col gap-y-8">
-        <PageTitle title="Edit blog post" />
-        <Form
-          buttonText="Update"
-          {...{ handleSubmit, loading, setPost, post, history, categories }}
-        />
+        <div className="flex justify-between">
+          <PageTitle title="Edit blog post" />
+          <Header
+            {...{
+              loading,
+              setPost,
+              post,
+              initialPost,
+              handleSubmit,
+              slug,
+              isButtonDisabled,
+            }}
+          />
+        </div>
+        <Form {...{ setPost, post, categories }} />
       </div>
     </Container>
   );
