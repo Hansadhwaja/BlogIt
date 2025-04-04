@@ -1,14 +1,17 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
+  MAX_TITLE_LENGTH = 125
+  MAX_DESCRIPTION_LENGTH = 10000
+
   enum :status, { draft: "Draft", publish: "Publish" }, default: :draft
   has_many :category_posts, dependent: :destroy
   has_many :categories, through: :category_posts
   belongs_to :user
   belongs_to :organization
 
-  validates :title, presence: true, length: { maximum: 125 }
-  validates :description, presence: true, length: { maximum: 10000 }
+  validates :title, presence: true, length: { maximum: MAX_TITLE_LENGTH }
+  validates :description, presence: true, length: { maximum: MAX_DESCRIPTION_LENGTH }
   validates_inclusion_of :is_bloggable, in: [true, false]
   validates :slug, uniqueness: true
   validate :slug_not_changed

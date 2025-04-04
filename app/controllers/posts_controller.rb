@@ -36,10 +36,10 @@ class PostsController < ApplicationController
     end
 
     def load_post!
-      @post = Post.find_by(slug: params[:slug])
+      @post = Post.find_by!(slug: params[:slug])
     end
 
     def load_posts!
-      @posts = Post.includes(:categories, :user, :organization).where(organization_id: params[:organization_id])
+      @posts = Post.includes(:categories, :user, :organization).where(organization_id: params[:organization_id].to_i)
     end
 end
