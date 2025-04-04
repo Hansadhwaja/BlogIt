@@ -51,6 +51,11 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
+  # Rails integration for factory_bot, a replacement for fixtures
+  gem "factory_bot_rails"
+
+  # For auto-generating demo data
+  gem "faker"
 end
 
 group :development do
@@ -74,3 +79,5 @@ end
 gem "react-rails", "~> 2.7.1"
 
 gem "pry-byebug"
+
+gem "simplecov", require: false, group: :test
