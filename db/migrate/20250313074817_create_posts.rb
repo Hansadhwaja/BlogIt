@@ -8,6 +8,7 @@ class CreatePosts < ActiveRecord::Migration[7.1]
       t.integer :upvote, null: false, default: 0
       t.integer :downvote, null: false, default: 0
       t.boolean :is_bloggable, default: false
+      t.string :status, default: "Draft", null: false
 
       t.timestamps
     end
