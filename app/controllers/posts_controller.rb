@@ -40,6 +40,8 @@ class PostsController < ApplicationController
     end
 
     def load_posts!
-      @posts = Post.includes(:categories, :user, :organization).where(organization_id: params[:organization_id].to_i)
+      @posts = Post.includes(
+        :categories, :user,
+        :organization).where(organization_id: params[:organization_id].to_i).order(created_at: :desc)
     end
 end
