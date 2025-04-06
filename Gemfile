@@ -81,3 +81,7 @@ gem "react-rails", "~> 2.7.1"
 gem "pry-byebug"
 
 gem "simplecov", require: false, group: :test
+
+gem "sidekiq", "~> 6.5.12"
+
+gem "redis", "~> 4.8", ">= 4.8.1"
