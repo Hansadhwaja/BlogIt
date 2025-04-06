@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   has_many :categories, through: :category_posts
   belongs_to :user
   belongs_to :organization
+  has_many :votes, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: MAX_TITLE_LENGTH }
   validates :description, presence: true, length: { maximum: MAX_DESCRIPTION_LENGTH }
@@ -18,6 +19,10 @@ class Post < ApplicationRecord
 
   before_create :set_slug
   before_save :set_published_at, if: -> { status_changed? && publish? }
+
+  def net_votes
+    upvote - downvote
+  end
 
   private
 
