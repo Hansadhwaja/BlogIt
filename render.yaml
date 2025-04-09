@@ -12,7 +12,7 @@ services:
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
-    buildCommand: ./bin/build_script
+    buildCommand: chmod +x ./bin/build_script && ./bin/build_script
     startCommand: bundle exec puma -C config/puma.rb
 
 databases:
