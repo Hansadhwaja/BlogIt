@@ -29,7 +29,7 @@ const defaultConfigurations = {
   platform: "browser",
   mainFields: ["browser", "module", "main"],
   resolveExtensions: extensions,
-  outdir: path.join(process.cwd(), "app/assets/builds"),
+  outdir: path.join(process.cwd(), "public/assets"),
   sourcemap: isWatchMode ? true : "external",
   loader: {
     ".png": "file",
