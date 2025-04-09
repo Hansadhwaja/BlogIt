@@ -1,0 +1,20 @@
+<div style="text-align: center; margin-bottom: 20px;">
+  <%= image_tag "blogger.png", width: "150" %>
+</div>
+
+<h1>BLOGIT Presents</h1>
+
+<h2><%= @post.title %></h2>
+<p><strong>Status:</strong> <%= @post.status %></p>
+<p><strong>Author:</strong> <%= @post.user.name %></p>
+<p><strong>Categories:</strong></p>
+<ul>
+  <% @post.categories.each do |category| %>
+  <li><%= category.name %></li>
+  <% end %>
+</ul>
+<p><strong>CreatedAt:</strong> <%= @post.created_at.strftime("%B %d, %Y %I:%M %p") %></p>
+<p><strong>LastPublishedAt:</strong> <%= @post.published_at&.strftime("%B %d, %Y") || "Not published yet" %></p>
+<p><strong>Upvote:</strong> <%= @post.upvote %></p>
+<p><strong>Downvote:</strong> <%= @post.downvote %></p>
+<p><%= simple_format(@post.description) %></p>

@@ -14,6 +14,19 @@ const update = (payload, slug) =>
 
 const destroy = slug => axios.delete(`${routes.posts}/${slug}`);
 
-const postsApi = { fetch, create, show, update, destroy };
+const generatePdf = slug => axios.post(`${routes.posts}/${slug}/generate_pdf`);
+
+const download = slug =>
+  axios.get(`${routes.posts}/${slug}/download`, { responseType: "blob" });
+
+const postsApi = {
+  fetch,
+  create,
+  show,
+  update,
+  destroy,
+  generatePdf,
+  download,
+};
 
 export default postsApi;

@@ -35,6 +35,13 @@ en:
   successfully_updated: "%{entity} was successfully updated!"
   successfully_deleted: "%{entity} was successfully deleted!"
   generic_error: "Something went wrong. Please try again later."
+  in_progress: "%{entity} is in progress."
+  not_found: "%{entity} not found."
   post:
     slug:
       immutable: "is immutable!"
+  report:
+    render: "Rendering the pdf"
+    generate: "Generating the PDF file"
+    upload: "Uploading to server"
+    attach: "Attaching the Pdf to the post"

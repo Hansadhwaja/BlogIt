@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import { Edit } from "@bigbinary/neeto-icons";
+import { Download, Edit } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui";
 import { Container, PageLoader } from "components/commons";
 import { useHistory, useParams, Link } from "react-router-dom";
 
 import Category from "./Category";
+import DownloadPdf from "./DownloadPdf";
 import { formatDate } from "./utils";
 
 import postsApi from "../../apis/posts";
@@ -16,6 +17,8 @@ import PageTitle from "../commons/PageTitle";
 const ShowPost = () => {
   const [post, setPost] = useState({});
   const [pageLoading, setPageLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { slug } = useParams();
   const history = useHistory();
   const userId = getFromLocalStorage("authUserId");
@@ -52,6 +55,19 @@ const ShowPost = () => {
             </div>
           )}
         </div>
+        <Button
+          className="m-auto flex h-fit w-12 justify-center"
+          icon={Download}
+          style="tertiary"
+          tooltipProps={{ content: "Download", position: "top" }}
+          onClick={() => setIsModalOpen(true)}
+        />
+        {isModalOpen && (
+          <DownloadPdf
+            title={post.title}
+            {...{ isModalOpen, setIsModalOpen, slug }}
+          />
+        )}
         {isOwner && (
           <Link className="my-auto" to={`/posts/${slug}/edit`}>
             <Button

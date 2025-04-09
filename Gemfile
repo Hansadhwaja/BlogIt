@@ -85,3 +85,8 @@ gem "simplecov", require: false, group: :test
 gem "sidekiq", "~> 6.5.12"
 
 gem "redis", "~> 4.8", ">= 4.8.1"
+
+# PDF generation gem
+gem "wicked_pdf"
+# wicked_pdf uses the following binary
+gem "wkhtmltopdf-binary"

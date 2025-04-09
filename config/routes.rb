@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   constraints(lambda { |req| req.format == :json }) do
     resources :posts, except: %i[new edit], param: :slug do
       resources :votes, only: :create
+      member do
+        post "generate_pdf"
+        get "download"
+      end
     end
     resources :categories, only: %i[index create]
     resources :users, only: :create
